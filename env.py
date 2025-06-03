@@ -11,7 +11,7 @@ class OneMaxEnv(gym.Env):
     行動: 各ビット位置をフリップ (0→1 または 1→0)
     """
 
-    def __init__(self, n_bits: int = 4, initial_ones_ratio: float = 0.3, n_max_steps: int = 4 * 2):
+    def __init__(self, n_bits: int, initial_ones_ratio: float, n_max_steps: int):
         """
         One Max環境の初期化
 

@@ -9,7 +9,7 @@ class MaskOneMaxEnv(OneMaxEnv):
     すでに1のビットはフリップしない（1の数を減らさない）制約を追加
     """
 
-    def __init__(self, n_bits: int = 4, initial_ones_ratio: float = 0.3, n_max_steps: int = 4 * 2, enable_mask: bool = True):
+    def __init__(self, n_bits: int, initial_ones_ratio: float, n_max_steps: int, enable_mask: bool = True):
         """
         マスク付きOne Max環境の初期化
 
