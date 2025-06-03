@@ -9,16 +9,21 @@ class MaskOneMaxEnv(OneMaxEnv):
     すでに1のビットはフリップしない（1の数を減らさない）制約を追加
     """
 
-    def __init__(self, n_bits: int = 100, initial_ones_ratio: float = 0.3, enable_mask: bool = True):
+    def __init__(self, n_bits: int = 4, initial_ones_ratio: float = 0.3, n_max_steps: int = 4 * 2, enable_mask: bool = True):
         """
         マスク付きOne Max環境の初期化
 
         Args:
             n_bits (int): ビット数
             initial_ones_ratio (float): 初期状態での1の比率
+            n_max_steps (int): 最大ステップ数
             enable_mask (bool): マスクを有効にするか
         """
-        super().__init__(n_bits, initial_ones_ratio)
+        super().__init__(
+            n_bits,
+            initial_ones_ratio,
+            n_max_steps,
+        )
         self.enable_mask = enable_mask  # マスクを有効にするか
 
     def compute_action_mask(self) -> np.ndarray:

@@ -210,6 +210,7 @@ if __name__ == "__main__":
     test_env = MaskOneMaxEnv(
         n_bits=Settings.N_BITS,
         initial_ones_ratio=Settings.INITIAL_ONES_RATIO,
+        n_max_steps=Settings.N_MAX_STEPS,
         enable_mask=Settings.ENABLE_MASK,
     )
 

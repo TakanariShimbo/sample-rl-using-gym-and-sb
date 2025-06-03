@@ -11,23 +11,23 @@ class OneMaxEnv(gym.Env):
     行動: 各ビット位置をフリップ (0→1 または 1→0)
     """
 
-    metadata = {"render_modes": ["human"]}
-
-    def __init__(self, n_bits: int = 100, initial_ones_ratio: float = 0.3):
+    def __init__(self, n_bits: int = 4, initial_ones_ratio: float = 0.3, n_max_steps: int = 4 * 2):
         """
         One Max環境の初期化
 
         Args:
             n_bits (int): ビット数
             initial_ones_ratio (float): 初期状態での1の比率
+            n_max_steps (int): 最大ステップ数
         """
         super().__init__()
         self.n_bits = n_bits
         self.initial_ones_ratio = initial_ones_ratio
-        self.max_steps = n_bits * 2  # 最大ステップ数
+        self.n_max_steps = n_max_steps
+
         self.step_count = 0
         self.bits = np.zeros(n_bits, dtype=np.int32)
-        self.initial_bits = None
+        self.initial_bits = deepcopy(self.bits)
 
         # 行動空間: n_bitsのビット位置
         self.action_space = spaces.Discrete(n_bits)
@@ -83,7 +83,7 @@ class OneMaxEnv(gym.Env):
             # 完了した場合、ボーナス報酬を与え、エピソード終了
             terminated = True
             reward += 10.0
-        elif self.step_count >= self.max_steps:
+        elif self.step_count >= self.n_max_steps:
             # ステップ上限に達した場合、エピソード終了
             terminated = True
 
