@@ -38,7 +38,7 @@ class MaskOneMaxEnv(OneMaxEnv):
 
         if self.enable_mask:
             # 1→0への変更を禁止
-            action_mask[self.bits == 1] = False
+            action_mask[self.initial_bits == 1] = False
 
         return action_mask
 
