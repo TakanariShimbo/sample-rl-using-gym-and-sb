@@ -76,7 +76,7 @@ class OneMaxTrainer:
             "MlpPolicy",
             self._create_vec_env(log_filename=f"{self._log_dir}/train", env=train_env),
             n_steps=1024,
-            batch_size=256,
+            batch_size=128,
             clip_range=0.2,
             learning_rate=3e-4,
             ent_coef=0.01,

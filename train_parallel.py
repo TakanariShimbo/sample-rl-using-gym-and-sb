@@ -65,7 +65,7 @@ class OneMaxParallelTrainer:
         )
         return eval_callback
 
-    def _create_model(self, train_env: VecMonitor) -> MaskablePPO:
+    def _create_model(self, train_env: VecMonitor, n_train_envs: int) -> MaskablePPO:
         """
         モデルの作成
 
@@ -78,8 +78,8 @@ class OneMaxParallelTrainer:
         model = MaskablePPO(
             "MlpPolicy",
             train_env,
-            n_steps=1024,
-            batch_size=256,
+            n_steps=1024 // n_train_envs,
+            batch_size=128,
             clip_range=0.2,
             learning_rate=3e-4,
             ent_coef=0.01,
@@ -128,7 +128,7 @@ class OneMaxParallelTrainer:
         )
 
         # モデルの作成
-        model = self._create_model(train_env=train_env)
+        model = self._create_model(train_env=train_env, n_train_envs=n_train_envs)
 
         # 学習開始
         print(f"Total timesteps: {train_steps}")
